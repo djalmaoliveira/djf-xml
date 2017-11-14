@@ -1,0 +1,22 @@
+{
+  "name": "djf-xml",
+  "version": "1.0.2",
+  "description": "XML parser",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "nodeunit test/"
+  },
+  "keywords": [
+    "XML",
+    "parser"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/djalmaoliveira/djf-xml.git"
+  },
+  "bugs": {
+    "url": "https://github.com/djalmaoliveira/djf-xml/issues"
+  },
+  "author": "Djalma Oliveira",
+  "license": "MIT"
+}
