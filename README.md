@@ -1,6 +1,8 @@
 djf-xml
 ========
 
+[![Build Status](https://travis-ci.org/djalmaoliveira/djf-xml.svg?branch=master)](https://travis-ci.org/djalmaoliveira/djf-xml)
+
 Simple javascript xml parser.
 
 
