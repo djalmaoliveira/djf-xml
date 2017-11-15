@@ -67,7 +67,7 @@ function hasTags (content) {
 function model (xml) {
   var path = ''
   var cache = {}
-  xml = xml.replace(/[\n\r]/gi, '')
+  xml = xml && typeof xml === 'string' ? xml.replace(/[\n\r]/gi, '') : ''
 
   return {
     tagValue: (tag, attribute) => {

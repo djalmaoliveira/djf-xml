@@ -27,6 +27,22 @@ module.exports.example = function (test) {
   test.done()
 }
 
+module.exports.invalidXML = function (test) {
+  test.equal(typeof XmlParse({}), 'object')
+
+  test.equal(typeof XmlParse([]), 'object')
+
+  test.equal(typeof XmlParse(null), 'object')
+
+  test.equal(typeof XmlParse(), 'object')
+
+  test.equal(typeof XmlParse(''), 'object')
+
+  test.equal(typeof XmlParse(5), 'object')
+
+  test.done()
+}
+
 module.exports.tagValue = function (test) {
   var xml = XmlParse(fixture())
 
