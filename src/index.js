@@ -19,7 +19,7 @@ function extractGroup (xml, tagName) {
  * Extract value between tags.
  *
  * @param      {<string>}  xml      The xml
- * @param      {<string>}  tagName        The tag name
+ * @param      {<string|array>}  tagName        The tag name
  * @param      {<string>}  attributeName  The attribute name
  * @return     {string | null}
  */
