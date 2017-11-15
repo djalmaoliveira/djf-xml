@@ -17,6 +17,9 @@
   "bugs": {
     "url": "https://github.com/djalmaoliveira/djf-xml/issues"
   },
+  "devDependencies": {
+    "nodeunit": "^0.11.2"
+  },
   "author": "Djalma Oliveira",
   "license": "MIT"
 }
