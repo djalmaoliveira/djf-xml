@@ -1,5 +1,6 @@
 # djf-xml
 [![Build Status](https://travis-ci.org/djalmaoliveira/djf-xml.svg?branch=master)](https://travis-ci.org/djalmaoliveira/djf-xml)
+[![Version](https://img.shields.io/npm/v/djf-xml.svg)](https://www.npmjs.com/package/djf-xml)
 
 Simple javascript xml parser.
 
@@ -50,7 +51,7 @@ console.log(xml.tagValue('item', 'id')) // 1
 
 * [Please send pull request with tests.](https://github.com/djalmaoliveira/djf-xml/pulls)
 
-## Running tests
+### Running tests
 
 ```
 npm run test
@@ -68,4 +69,4 @@ npm run test
 
 ## License
 
-[MIT](LICENSE)
+[MIT](https://github.com/djalmaoliveira/djf-xml/blob/master/LICENSE)
