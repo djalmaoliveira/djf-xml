@@ -1,7 +1,7 @@
 var XmlParse = require('../src')
 
 function fixture () {
-  return '<service>test</service><item id="1">first</item><item id="2">second</item><user role="developer"><name>djf</name></user>'
+  return '<service>test</service><item id="1">first</item><item id="2">second</item><user role="developer"><name>djf</name></user><similar><pFCPSTRet>1.0001</pFCPSTRet><pFCPST>1.0000</pFCPST></similar>'
 }
 
 module.exports.example = function (test) {
@@ -91,6 +91,19 @@ module.exports.invalidTagGroup = function (test) {
   test.equal(xml.tagGroup('').length, 0)
 
   test.equal(xml.tagGroup(null).length, 0)
+
+  test.done()
+}
+
+module.exports.similar = function (test) {
+  var xml = XmlParse(fixture())
+  var similar = xml.tagValue('similar')
+
+  test.equal(typeof similar, 'object')
+
+  test.equal(similar.tagValue('pFCPST'), '1.0000')
+
+  test.equal(similar.tagValue('pFCPSTRet'), '1.0001')
 
   test.done()
 }

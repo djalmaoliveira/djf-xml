@@ -31,7 +31,15 @@ function extract (xml, tagName, attributeName) {
   var found = null
   var tagFound = null
   for (var i = 0; i < tagName.length; i++) {
-    found = new RegExp(`<${tagName[i]}.*?>(.+?)</${tagName[i]}>`, 'i').exec(xml)
+    // without attributes
+    found = new RegExp(`<${tagName[i]}\\s*>(.+?)</${tagName[i]}>`, 'i').exec(xml)
+    if (found) {
+      tagFound = tagName[i]
+      break
+    }
+
+    // with attributes
+    found = new RegExp(`<${tagName[i]} .*?>(.+?)</${tagName[i]}>`, 'i').exec(xml)
     if (found) {
       tagFound = tagName[i]
       break
