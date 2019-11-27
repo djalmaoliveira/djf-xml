@@ -1,10 +1,10 @@
 {
   "name": "djf-xml",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "XML parser",
   "main": "src/index.js",
   "scripts": {
-    "test": "nodeunit test/"
+    "test": "mocha test/"
   },
   "keywords": [
     "XML",
@@ -18,8 +18,9 @@
     "url": "https://github.com/djalmaoliveira/djf-xml/issues"
   },
   "devDependencies": {
-    "nodeunit": "^0.11.2"
+    "mocha": "^6.2.2"
   },
   "author": "Djalma Oliveira",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {}
 }

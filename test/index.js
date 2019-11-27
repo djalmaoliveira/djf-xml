@@ -1,109 +1,118 @@
+var assert = require('assert')
 var XmlParse = require('../src')
 
 function fixture () {
   return '<service>test</service><item id="1">first</item><item id="2">second</item><user role="developer"><name>djf</name></user><similar><pFCPSTRet>1.0001</pFCPSTRet><pFCPST>1.0000</pFCPST></similar>'
 }
 
-module.exports.example = function (test) {
-  var xml = XmlParse(fixture())
+describe('Examples', function () {
+  it('should test examples', function () {
+    var xml = XmlParse(fixture())
 
-  // by tag
-  console.log(xml.tagValue('service')) // test
+    // by tag
+    // console.log(xml.tagValue('service')) // test
+    assert.strictEqual(xml.tagValue('service'), 'test')
 
-  // by tag and attribute
-  console.log(xml.tagValue('user', 'role')) // developer
+    // by tag and attribute
+    // console.log(xml.tagValue('user', 'role')) // developer
+    assert.strictEqual(xml.tagValue('user', 'role'), 'developer')
 
-  // by nested tags
-  console.log(xml.tagValue('user').tagValue('name')) // djf
+    // by nested tags
+    // console.log(xml.tagValue('user').tagValue('name')) // djf
+    assert.strictEqual(xml.tagValue('user').tagValue('name'), 'djf')
 
-  // by array of tags, matiching the first tag found
-  console.log(xml.tagValue(['not', 'service'])) // test
+    // by array of tags, matching the first tag found
+    // console.log(xml.tagValue(['not', 'service'])) // test
+    assert.strictEqual(xml.tagValue(['not', 'service']), 'test')
 
-  // group of tags
-  var itens = xml.tagGroup('item')
-  console.log(itens) // ["<item id=\"1\">first</item>", "<item id=\"2\">second</item>"]
-  console.log(xml.tagValue('item', 'id')) // 1
+    // group of tags
+    var itens = xml.tagGroup('item')
+    // console.log(itens) // ["<item id=\"1\">first</item>", "<item id=\"2\">second</item>"]
+    // console.log(xml.tagValue('item', 'id')) // 1
+    assert.strictEqual(itens.length, 2)
+    assert.strictEqual(xml.tagValue('item', 'id'), '1')
+  })
+})
 
-  test.done()
-}
+describe('Tests', function () {
+  describe('invalidXML', function () {
+    it('should test for invalid XML input', function () {
+      assert.strictEqual(typeof XmlParse({}), 'object')
 
-module.exports.invalidXML = function (test) {
-  test.equal(typeof XmlParse({}), 'object')
+      assert.strictEqual(typeof XmlParse([]), 'object')
 
-  test.equal(typeof XmlParse([]), 'object')
+      assert.strictEqual(typeof XmlParse(null), 'object')
 
-  test.equal(typeof XmlParse(null), 'object')
+      assert.strictEqual(typeof XmlParse(), 'object')
 
-  test.equal(typeof XmlParse(), 'object')
+      assert.strictEqual(typeof XmlParse(''), 'object')
 
-  test.equal(typeof XmlParse(''), 'object')
+      assert.strictEqual(typeof XmlParse(5), 'object')
+    })
+  })
 
-  test.equal(typeof XmlParse(5), 'object')
+  describe('tagValue', function () {
+    it('should test tagValue()', function () {
+      var xml = XmlParse(fixture())
 
-  test.done()
-}
+      assert.strictEqual(xml.tagValue('service'), 'test')
 
-module.exports.tagValue = function (test) {
-  var xml = XmlParse(fixture())
+      assert.strictEqual(xml.tagValue(['service']), 'test')
 
-  test.equal(xml.tagValue('service'), 'test')
+      assert.strictEqual(xml.tagValue(['not', 'service']), 'test')
 
-  test.equal(xml.tagValue(['service']), 'test')
+      assert.strictEqual(xml.tagValue('user', 'role'), 'developer')
 
-  test.equal(xml.tagValue(['not', 'service']), 'test')
+      assert.strictEqual(typeof xml.tagValue('user'), 'object')
+    })
+  })
 
-  test.equal(xml.tagValue('user', 'role'), 'developer')
+  describe('invalidTagValue', function () {
+    it('should test for invalid tagValue() args', function () {
+      var xml = XmlParse(fixture())
 
-  test.equal(typeof xml.tagValue('user'), 'object')
+      assert.strictEqual(xml.tagValue(), null)
 
-  test.done()
-}
+      assert.strictEqual(xml.tagValue(''), null)
 
-module.exports.invalidTagValue = function (test) {
-  var xml = XmlParse(fixture())
+      assert.strictEqual(xml.tagValue(null), null)
+    })
+  })
 
-  test.equal(xml.tagValue(), null)
+  describe('tagGroup', function () {
+    it('should test for tagGroup()', function () {
+      var xml = XmlParse(fixture())
 
-  test.equal(xml.tagValue(''), null)
+      var itens = xml.tagGroup('item')
 
-  test.equal(xml.tagValue(null), null)
+      assert.strictEqual(itens.length, 2)
+    })
+  })
 
-  test.done()
-}
+  describe('invalidTagGroup', function () {
+    it('should test for invalid tagGroup() args', function () {
+      var xml = XmlParse(fixture())
 
-module.exports.tagGroup = function (test) {
-  var xml = XmlParse(fixture())
+      assert.strictEqual(xml.tagGroup('notfound').length, 0)
 
-  var itens = xml.tagGroup('item')
+      assert.strictEqual(xml.tagGroup().length, 0)
 
-  test.equal(itens.length, 2)
+      assert.strictEqual(xml.tagGroup('').length, 0)
 
-  test.done()
-}
+      assert.strictEqual(xml.tagGroup(null).length, 0)
+    })
+  })
 
-module.exports.invalidTagGroup = function (test) {
-  var xml = XmlParse(fixture())
+  describe('similarTagName', function () {
+    it('should test for similar tag names', function () {
+      var xml = XmlParse(fixture())
+      var similar = xml.tagValue('similar')
 
-  test.equal(xml.tagGroup('notfound').length, 0)
+      assert.strictEqual(typeof similar, 'object')
 
-  test.equal(xml.tagGroup().length, 0)
+      assert.strictEqual(similar.tagValue('pFCPST'), '1.0000')
 
-  test.equal(xml.tagGroup('').length, 0)
-
-  test.equal(xml.tagGroup(null).length, 0)
-
-  test.done()
-}
-
-module.exports.similar = function (test) {
-  var xml = XmlParse(fixture())
-  var similar = xml.tagValue('similar')
-
-  test.equal(typeof similar, 'object')
-
-  test.equal(similar.tagValue('pFCPST'), '1.0000')
-
-  test.equal(similar.tagValue('pFCPSTRet'), '1.0001')
-
-  test.done()
-}
+      assert.strictEqual(similar.tagValue('pFCPSTRet'), '1.0001')
+    })
+  })
+})
