@@ -18,9 +18,8 @@
     "url": "https://github.com/djalmaoliveira/djf-xml/issues"
   },
   "devDependencies": {
-    "mocha": "^6.2.2"
+    "mocha": "^11.7.5"
   },
   "author": "Djalma Oliveira",
-  "license": "MIT",
-  "dependencies": {}
+  "license": "MIT"
 }
