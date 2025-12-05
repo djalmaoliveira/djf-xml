@@ -1,6 +1,5 @@
 # djf-xml
-[![Build Status](https://travis-ci.org/djalmaoliveira/djf-xml.svg?branch=master)](https://travis-ci.org/djalmaoliveira/djf-xml)
-[![Version](https://img.shields.io/npm/v/djf-xml.svg)](https://www.npmjs.com/package/djf-xml)
+![Test](https://github.com/djalmaoliveira/djf-xml/actions/workflows/node.js.yml/badge.svg) ![Version](https://img.shields.io/npm/v/djf-xml.svg)
 
 Simple javascript xml parser.
 
